@@ -1,7 +1,9 @@
 import express from "express";
-import router from "./routes/user.router.js";
 import cookieParser from "cookie-parser"
 import cors from "cors"
+import AuthRouter from "./routes/auth.router.js";
+import userRouter from "./routes/user.router.js";
+import adminRouter from "./routes/admin.router.js";
 
 const app = express();
 
@@ -21,6 +23,8 @@ app.get("/", (req, res) => {
 });
 
 
-app.use('/okey', router)
+app.use('/auth', AuthRouter)
+app.use('/admin', adminRouter)
+app.use('/user', userRouter)
 
 export default app;
