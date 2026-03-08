@@ -1,13 +1,13 @@
-import express from "express"
-import { login, registerUser } from "../controllers/user.controller.js"
+import express from "express";
+import { verifyJWT } from "../middleware/verifyJWT.js";
+import { isUser } from "../middleware/role.middleware.js";
+import { userDetails } from "../controllers/user.controller.js";
+
+const userRouter = express.Router()
+
+userRouter.use(verifyJWT , isUser)
+
+userRouter.get("/userDetails" , userDetails)
 
 
-const router = express.Router()
-
-
-router.post("/registerUser", registerUser)
-router.post("/login", login)
-
-
-
-export default router
+export default userRouter;
